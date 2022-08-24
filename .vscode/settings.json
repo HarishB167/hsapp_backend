@@ -1,0 +1,5 @@
+{
+    "python.defaultInterpreterPath": "/home/pi/.local/share/virtualenvs/hs_webapp_backend-ynCubjR6/bin/python",
+    "emmet.triggerExpansionOnTab": true,
+    "files.associations": {"*html": "html"}
+}

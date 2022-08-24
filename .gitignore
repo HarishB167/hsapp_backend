@@ -1,0 +1,8 @@
+*.pyc
+*/Pipfile.lock
+*.png
+*.jpg
+*.jpeg
+*dump.rdb
+*.db
+/static/
