@@ -9,23 +9,11 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$us%@1mr(-q2iw9)q#*458@bsa(zzl174_*yhh+(%)h5pr0d-c'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Application definition
@@ -44,6 +32,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,15 +65,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hs_webapp_backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -140,3 +121,30 @@ CORS_ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
 ]
+
+LOGGING = {
+  'version': 1,
+  'disable_existing_loggers': False,
+  'handlers' : {  # What will happen to log messages
+    'console': {
+      'class': 'logging.StreamHandler',
+      
+    },
+    'file' : {
+      'class': 'logging.FileHandler',
+      'filename': 'general.log'
+    }
+  },
+  'loggers': { # define logger for individual app or submodule
+    '': { # captures from all apps
+      'handlers': ['console', 'file'], # reference handlers
+      'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO')
+    }
+  },
+  'formatters': {
+    'verbose': {
+      'format': '{asctime} ({levelname}) - {name} - {message}',
+      'style': '{'
+    }
+  }
+}
