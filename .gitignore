@@ -6,3 +6,5 @@
 *dump.rdb
 *.db
 /static/
+*.log
+*.sqlite3

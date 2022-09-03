@@ -13,17 +13,25 @@ class BranchSerializer(serializers.ModelSerializer):
         model = Branch
         fields = ['sort_number', 'id', 'title', 'mindmap', 'content']
 
-    mindmap = serializers.PrimaryKeyRelatedField(read_only=True)
-    sort_number = serializers.IntegerField(read_only=True)
+    sort_number = serializers.IntegerField()
     content = BranchLineSerializer(many=True, read_only=True, source='content_line')
 
+
+class SimpleBranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Branch
+        fields = ['sort_number', 'id', 'title', 'mindmap', 'content']
+
+    mindmap = serializers.PrimaryKeyRelatedField(read_only=True)
+    sort_number = serializers.IntegerField()
+    content = BranchLineSerializer(many=True, read_only=True, source='content_line')
 
 class MindmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mindmap
         fields = ['id', 'title', 'category', 'revisions', 'branches']
 
-    branches = BranchSerializer(many=True, read_only=True)
+    branches = SimpleBranchSerializer(many=True, read_only=True)
 
 class AddBranchLineSerializer(serializers.ModelSerializer):
     class Meta:
