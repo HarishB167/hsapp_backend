@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'corsheaders',
     'mindmaps',
+    'core',
 ]
 
 MIDDLEWARE = [

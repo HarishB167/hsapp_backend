@@ -1,4 +1,3 @@
-from wsgiref import validate
 from rest_framework import serializers
 from .models import Branch, BranchLine, Mindmap
 
