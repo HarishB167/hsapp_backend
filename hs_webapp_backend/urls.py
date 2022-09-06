@@ -21,6 +21,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('mindmaps.urls')),
-    path('app/', include('core.urls')),
+    path('api/', include('core.urls')),
     path('', TemplateView.as_view(template_name='home.html')),
 ]
