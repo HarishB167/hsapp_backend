@@ -9,8 +9,10 @@ class MindmapViewSet(ModelViewSet):
 
     def get_queryset(self):
         if self.action == 'list':
-            return Mindmap.objects.all().defer('branches')
-        return Mindmap.objects.all()
+            return Mindmap.objects.order_by('category','title').all().defer('branches')
+        return Mindmap.objects.prefetch_related('branches', 'branches__content_line') \
+            .order_by('branches__sort_number', 'branches__content_line__sort_number') \
+            .all()
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
