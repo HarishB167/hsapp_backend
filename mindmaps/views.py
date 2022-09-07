@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from django.db.models import Prefetch
 
 from .serializers import BranchLineSerializer, BranchSerializer, MindmapSerializer, AddMindmapSerializer, SimpleMindmapSerializer, UpdateMindmapSerializer
 from .models import Branch, BranchLine, Mindmap
@@ -10,8 +11,9 @@ class MindmapViewSet(ModelViewSet):
     def get_queryset(self):
         if self.action == 'list':
             return Mindmap.objects.order_by('category','title').all().defer('branches')
-        return Mindmap.objects.prefetch_related('branches', 'branches__content_line') \
-            .order_by('branches__sort_number', 'branches__content_line__sort_number') \
+        return Mindmap.objects.prefetch_related(
+                Prefetch('branches', Branch.objects.order_by('sort_number')), 
+                Prefetch('branches__content_line', BranchLine.objects.order_by('sort_number'))) \
             .all()
 
     def get_serializer_class(self):
