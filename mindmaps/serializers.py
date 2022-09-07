@@ -28,7 +28,7 @@ class SimpleBranchSerializer(serializers.ModelSerializer):
 class MindmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mindmap
-        fields = ['id', 'title', 'category', 'revisions', 'branches']
+        fields = ['id', 'title', 'category', 'revisions', 'image_link', 'branches']
 
     branches = SimpleBranchSerializer(many=True, read_only=True)
 
@@ -46,7 +46,7 @@ class AddBranchSerializer(serializers.ModelSerializer):
 class AddMindmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mindmap
-        fields = ['id', 'title', 'category', 'revisions', 'branches']
+        fields = ['id', 'title', 'category', 'revisions', 'image_link', 'branches']
 
     branches = AddBranchSerializer(many=True)
 
@@ -83,7 +83,7 @@ class UpdateBranchSerializer(serializers.ModelSerializer):
 class UpdateMindmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mindmap
-        fields = ['id', 'title', 'category', 'revisions', 'branches']
+        fields = ['id', 'title', 'category', 'revisions', 'image_link', 'branches']
 
     branches = UpdateBranchSerializer(many=True)
 
@@ -92,6 +92,7 @@ class UpdateMindmapSerializer(serializers.ModelSerializer):
         instance.title = validated_data['title']
         instance.category = validated_data['category']
         instance.revisions = validated_data['revisions']
+        instance.image_link = validated_data['image_link']
         instance.save()
 
         def update_branch(branch, idx):
@@ -130,5 +131,5 @@ class UpdateMindmapSerializer(serializers.ModelSerializer):
 class SimpleMindmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mindmap
-        fields = ['id', 'title', 'category', 'revisions']
+        fields = ['id', 'title', 'category', 'revisions', 'image_link']
 
