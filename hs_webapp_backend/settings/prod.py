@@ -11,6 +11,9 @@ DATABASES = {
   'default': dj_database_url.config()
 }
 
+if os.environ.get('MYSQL_ATTR_SSL_CA'):
+  DATABASES['default']['OPTIONS'] = {'ssl': {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}}
+
 
 ALLOWED_HOSTS = []
 
