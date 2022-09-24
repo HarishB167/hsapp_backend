@@ -1,9 +1,22 @@
+from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from django.db.models import Prefetch
 
 from .serializers import BranchLineSerializer, BranchSerializer, MindmapSerializer, AddMindmapSerializer, SimpleMindmapSerializer, UpdateMindmapSerializer
 from .models import Branch, BranchLine, Mindmap
+
+@api_view()
+def increment_revisions(request, id):
+    try:
+        mindmap = Mindmap.objects.get(pk=id)
+        mindmap.revisions += 1
+        mindmap.save()
+        serializer = UpdateMindmapSerializer(mindmap)
+        return Response(serializer.data)
+    except Mindmap.DoesNotExist:
+	    return Response(f"Person with id {id} doesn't exist", status=status.HTTP_404_NOT_FOUND)
 
 
 class MindmapViewSet(ModelViewSet):

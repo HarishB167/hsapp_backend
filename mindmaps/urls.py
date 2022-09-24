@@ -13,3 +13,4 @@ branches_router.register('branchline', views.BranchLineViewSet, basename='mindma
 
 urlpatterns = router.urls + mindmaps_router.urls + branches_router.urls
 
+urlpatterns += [path('increment_revisions/<id>/', views.increment_revisions)]
