@@ -12,7 +12,7 @@ DATABASES = {
 }
 
 if os.environ.get('MYSQL_ATTR_SSL_CA'):
-  DATABASES['default']['OPTIONS'] = {'ssl': {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}}
+    DATABASES['default']['OPTIONS'] = {'ssl': {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}}
 
 
 ALLOWED_HOSTS = []
@@ -24,4 +24,5 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 RENDER_EXTERNAL_CORS_ORIGINS = os.environ.get('RENDER_EXTERNAL_CORS_ORIGINS')
 if RENDER_EXTERNAL_CORS_ORIGINS:
-    CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_CORS_ORIGINS)
+    origins = RENDER_EXTERNAL_CORS_ORIGINS.split(',')
+    CORS_ALLOWED_ORIGINS += origins
