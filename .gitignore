@@ -8,3 +8,5 @@
 /static/
 *.log
 *.sqlite3
+.venv/
+.vscode/
