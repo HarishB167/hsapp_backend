@@ -25,18 +25,28 @@
       crossorigin="anonymous"
     ></script>
     <title>Home</title>
+    <style>
+      body {
+        background: url(https://i.ibb.co/9gkQC3Q/nordwood-themes-Kcs-KWw77-Ovw-unsplash.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .hsapp__container {
+        width: 50%;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .hsapp__container {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
-  <body
-    style="
-      background: url(https://i.ibb.co/9gkQC3Q/nordwood-themes-Kcs-KWw77-Ovw-unsplash.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
-    "
-  >
+  <body>
     <div
       class="container d-flex vh-100 vw-100 align-items-center justify-content-start"
     >
-      <div class="container d-flex flex-column w-50 ms-0">
+      <div class="hsapp__container container d-flex flex-column ms-0">
         <span><strong>Harish Singh</strong></span>
         <h1>Django RESTful Backend for Personal Project</h1>
         <span
